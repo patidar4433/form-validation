@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation - create a form and validate it</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 35%;
+        }
+
+        span {
+            color: red;
+            font-size: 15;
+            font-weight: 700;
+        }
+    </style>
+
+    <script>
+        // button create profile clicked function
+
+        function clicked() {
+            var name, f = true;
+            name = document.getElementById("name").value;
+            if (name.length == 0) {
+                f = false;
+                document.getElementById("sname").innerHTML = " *Enter Name"
+            }
+
+            var email;
+            email = document.getElementById("email").value;
+            if (email.length == 0) {
+                f = false;
+                document.getElementById("semail").innerHTML = " *Enter Email"
+            }
+
+            var password;
+            password = document.getElementById("pwd").value;
+            if (password.length == 0) {
+                f = false;
+                document.getElementById("spwd").innerHTML = " *Enter Password"
+            }
+
+            var mob;
+            mob = document.getElementById("mob").value;
+            if (mob.length == 0) {
+                f = false;
+                document.getElementById("smob").innerHTML = " *Enter Mobile Number"
+            }
+
+            var male, female;
+            male = document.getElementById("male").value;
+            female = document.getElementById("female").value;
+            if(!(male.checked||female.checked)){
+                f = false;
+                document.getElementById("sgender").innerHTML = " *Select any option";
+            }
+            return f;
+        }
+
+        // validation for name
+
+        function namekey() {
+            var name, reg;
+            name = document.getElementById("name").value;
+            reg = /^[a-zA-Z]+$/
+            if (!reg.test(name)) {
+                document.getElementById("sname").innerHTML = " *Use character only"
+            } else {
+                document.getElementById("sname").innerHTML = "";
+            }
+        }
+
+        // validation for email
+
+        function emailkey() {
+            var email, reg;
+            email = document.getElementById("email").value;
+            reg = /^([a-zA-Z0-9@.*#]{8,32})$/
+            if (!reg.test(email)) {
+                document.getElementById("semail").innerHTML = " *Invalid Email";
+            } else {
+                document.getElementById("semail").innerHTML = "";
+            }
+        }
+
+        // validation for password
+
+        function pwdkey(){
+            var pwd, reg;
+            pwd = document.getElementById("pwd").value;
+            reg = /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$/
+            if(!reg.test(pwd)){
+                document.getElementById("spwd").innerHTML = " *Invalid Password";
+            }else {
+                document.getElementById("spwd").innerHTML = "";
+            }
+        }
+
+        // validation for Mobile number
+
+        function mobkey(){
+            var mob, reg;
+            mob = document.getElementById("mob").value;
+            reg = /^([9]{1})([234789]{1})([0-9]{8})$/;
+            if(!reg.test(mob)){
+                document.getElementById("smob").innerHTML = " *Invalid Mobile Number";
+            }else {
+                document.getElementById("smob").innerHTML = "";
+            }
+        }
+
+        // validation for gender
+
+        function clearall(clear){
+            clear.innerHTML = "";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <h1>Validation Form</h1>
+        <div class="formfield">
+            <form method="post">
+                <table border="1" , align="center">
+                    <tr>
+                        <td>
+                            <b>Name:</b>
+                            <input type="text" id="name" onkeyup="namekey()">
+                            <span id="sname"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Email:</b>
+                            <input type="email" id="email" onkeyup="emailkey()">
+                            <span id="semail"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Password:</b>
+                            <input type="password" id="pwd" onkeyup="pwdkey()">
+                            <span id="spwd"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Mob No:</b>
+                            <input type="number" id="mob" onkeyup="mobkey()">
+                            <span id="smob"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Gender:</b>
+                            <input type="radio" name="gender" id="male" onchange="clearall(sgender)">Female
+                            <input type="radio" name="gender" id="female" onchange="clearall(sgender)">Male
+                            <span id="sgender"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" value="Create Profile" onclick="clicked()">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
